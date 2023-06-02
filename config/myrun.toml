@@ -1,0 +1,6 @@
+[section.subsection1]
+param1 = 1_900_000
+param3 = "bar"
+
+[section.subsection2.param5]
+var1 = 2
