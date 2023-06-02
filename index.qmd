@@ -1,0 +1,32 @@
+---
+title: Effective parameter management with XParams
+# date: today
+author: 
+    - Paola Arce
+    - Victor Díaz
+format: 
+  revealjs:
+    slide-number: true
+    header-logo: "img/PyData_logo.png"
+    logo: "img/SDF__Symbol Logo_Blue_RGB.png"
+    footer: PyData London 2023
+    theme: [night, custom.scss]
+    highlight-style: github
+    # slide-number: c/t
+    toc-depth: 1
+    # transition: slide
+filters:
+    - reveal-header
+---
+
+## Introduction
+
+## Motivation
+
+## What is XParams?
+
+## XParams in action
+
+## Key Features and Use Cases
+
+# Thank you
