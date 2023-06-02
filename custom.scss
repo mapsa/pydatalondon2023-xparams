@@ -1,9 +1,9 @@
 /*-- scss:defaults --*/
 
-$body-bg: #222831;
-$body-color: #fdfdfd;
+$body-bg: #ffffff;
+$body-color: #3d3b40;
 $link-color: #0076ca;
-$presentation-heading-color: #fefefe;
+$presentation-heading-color: #1c3e55;
 $light-bg-text-color: #9c2e8f;
 $code-block-font-size: 1em;
 $presentation-heading-letter-spacing	: normal;
@@ -23,15 +23,15 @@ $presentation-heading-color: #383d3d !default;
   color: rgb(139, 240, 243);
   }
 
-// .reveal .slide-logo {
-//     display: block;
-//     position: fixed;
-//     bottom: unset !important;
-//     right: unset !important;
-//     top: 5px;
-//     left: 12px;
-//     height: 100px !important;
-//     width: 100x !important;
-//     max-width: unset !important;
-//     max-height: unset !important;
-//   }
+.reveal .slide-logo {
+    display: block;
+    position: fixed;
+    // bottom: unset !important;
+    // right: unset !important;
+    bottom: 5px;
+    right: 12px;
+    height: 30px !important;
+    width: 30x !important;
+    max-width: unset !important;
+    max-height: unset !important;
+  }
