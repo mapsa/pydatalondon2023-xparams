@@ -180,15 +180,21 @@ XPARAMS=config-prod make
 
 ## {background-color="lightyellow"}
 
-::: {style="text-align: center; margin-top: 200px; font-size: 5em"}
+::: {style="text-align: center; margin-top: 50px; font-size: 5em"}
 
 Thank you 
 :::
 
-::: {style="text-align: center; margin-top: 100px; font-size: 1em"}
+::: {style="text-align: center; margin-top: 30px; font-size: 1em"}
 Do you want to know when this code is open source? Get in touch:
 
  [paola.arce@smartdatafoundry.com](paola.arce@smartdatafoundry.com)
  
  [victor.diaz@smartdatafoundry.com](victor.diaz@smartdatafoundry.com)
+
+More info about Smart Data Foundry and the product we are developing here:
+
+ [https://smartdatafoundry.com](https://smartdatafoundry.com)
+
+ [https://aizle.ai](https://aizle.ai)
 :::
