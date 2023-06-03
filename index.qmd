@@ -178,7 +178,288 @@ RUN=config-prod make
 
 XParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy calle Aizle ( [https://aizle.ai](https://aizle.ai)).
 
-## XParams in action
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+```python
+defaults = {
+    "param": "my_title",
+    "section": {
+        "subsection1": {
+            "param1": 500,
+        },
+        "subsection2": {
+            "param3": date(2023, 6, 3),
+            "param5": {
+                "var1": 1,
+                "var2": "2",
+            },
+        },
+    },
+}
+```
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+```python
+from xparams import XParams
+
+params = XParams(defaults, user_params_dir="config")
+```
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+
+```{.python code-line-numbers="5"}
+defaults = {
+    "param": "my_title",
+    "section": {
+        "subsection1": {
+            "param1": 500,
+        },
+        "subsection2": {
+            "param3": date(2023, 6, 3),
+            "param5": {
+                "var1": 1,
+                "var2": "2",
+            },
+        },
+    },
+}
+```
+:::
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+
+```{.python code-line-numbers="5"}
+defaults = {
+    "param": "my_title",
+    "section": {
+        "subsection1": {
+            "param1": 500,
+        },
+        "subsection2": {
+            "param3": date(2023, 6, 3),
+            "param5": {
+                "var1": 1,
+                "var2": "2",
+            },
+        },
+    },
+}
+```
+:::
+
+```python
+>>> params.section.subsection1.param1
+>>> 500
+```
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+
+```{.python code-line-numbers="9-12"}
+defaults = {
+    "param": "my_title",
+    "section": {
+        "subsection1": {
+            "param1": 500,
+        },
+        "subsection2": {
+            "param3": date(2023, 6, 3),
+            "param5": {
+                "var1": 1,
+                "var2": "2",
+            },
+        },
+    },
+}
+```
+:::
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+
+```{.python code-line-numbers="9-12"}
+defaults = {
+    "param": "my_title",
+    "section": {
+        "subsection1": {
+            "param1": 500,
+        },
+        "subsection2": {
+            "param3": date(2023, 6, 3),
+            "param5": {
+                "var1": 1,
+                "var2": "2",
+            },
+        },
+    },
+}
+```
+:::
+
+```python
+>>> params.section.subsection2.param5.get_params()
+>>> {'var1': 1, 'var2': '2'}
+```
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### Using `myrun.toml`:
+
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### Using `myrun.toml`:
+
+::: {layout-ncol=2}
+
+```toml
+[section.subsection1]
+param1 = 1_900_000
+
+[section.subsection2.param5]
+var1 = 2
+```
+:::
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### Using `myrun.toml`:
+
+::: {layout-ncol=2}
+
+```toml
+[section.subsection1]
+param1 = 1_900_000
+
+[section.subsection2.param5]
+var1 = 2
+```
+
+```python
+params = XParams(
+    defaults,
+    name='myrun',
+    user_params_dir="config"
+)
+```
+
+:::
+
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### Using `myrun.toml`:
+
+::: {layout-ncol=2}
+
+```toml
+[section.subsection1]
+param1 = 1_900_000
+
+[section.subsection2.param5]
+var1 = 2
+```
+
+```python
+params = XParams(
+    defaults,
+    name='myrun',
+    user_params_dir="config"
+)
+```
+:::
+
+```python
+>>> params.section.subsection1.param1
+>>> 1900000
+```
+
+```python
+>>> params.section.subsection2.param5.get_params()
+>>> {'var1': 2, 'var2': '2'}
+```
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### **I don't want to change my script everytime**
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### **You don't need to!!!**
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### **You don't need to!!!**
+::: {layout-ncol=2}
+```python
+params = XParams(
+    defaults,
+    user_params_dir="config"
+)
+```
+:::
+
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### **You don't need to!!!**
+
+::: {layout-ncol=2}
+```python
+params = XParams(
+    defaults,
+    user_params_dir="config"
+)
+```
+
+```bash
+XPARAMS=myrun python myscript.py
+```
+:::
+
+
+## XParams in action{auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+### **You don't need to!!!**
+
+::: {layout-ncol=2}
+```python
+params = XParams(
+    defaults,
+    user_params_dir="config"
+)
+```
+
+
+```bash
+XPARAMS=myrun python myscript.py
+```
+:::
+
+```python
+>>> params.section.subsection1.param1
+>>> 1900000
+```
+
+```python
+>>> params.section.subsection2.param5.get_params()
+>>> {'var1': 2, 'var2': '2'}
+```
+
 
 ## {background-color="lightyellow"}
 
