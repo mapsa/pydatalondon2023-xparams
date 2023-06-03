@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.258">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Paola Arce">
+<meta name="author" content="Victor Díaz">
+
+<title>Effective parameter management with XParams</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Effective parameter management with XParams</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Paola Arce </p>
+             <p>Victor Díaz </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<!-- ------------------ Slide ------------------------ -->
+<section id="what-is-it" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-it">What is it?</h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><a href="https://stochasticsolutions.com/miro/">Miró</a> is a data analysis software developed and maintained by our own Nick Radcliffe.</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: center;">
+<p><img src="img/Miro-logo.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p>It has been written in Python and supports command line expressions and (lisp-like) functions.</p>
+</div>
+</div>
+</div>
+<!-- ------------------ Slide ------------------------ -->
+</section>
+<section id="the-artists" class="level2" data-background-color="black" data-background-opacity="0.3" data-background-image="img/catalan-landscape.jpg">
+<h2 data-background-color="black" data-background-opacity="0.3" data-background-image="img/catalan-landscape.jpg" class="anchored" data-anchor-id="the-artists">The Artists</h2>
+<p>Miró is part of The Artists Software Suite:</p>
+<ul>
+<li><strong><a href="">Miró:</a></strong> data analysis (extraction, manipulation, exploration, reporting, prediction and test-driven data analysis (TDDA))</li>
+<li><strong>Klee:</strong> visualization</li>
+<li><strong>Rothko:</strong> optimization services</li>
+<li><strong>Giacometti:</strong> infrastructure</li>
+<li><strong>Salvador:</strong> web interface</li>
+</ul>
+<!-- ------------------ Slide ------------------------ -->
+</section>
+<section id="why-miró" class="level2">
+<h2 class="anchored" data-anchor-id="why-miró">Why Miró?</h2>
+<ul>
+<li><strong>Column-Oriented Storage:</strong> is optimized for column operations (statistics, derived fields and xtabs), whereas row operations can be quite slow</li>
+<li><strong><a href="https://tdda.readthedocs.io/en/latest/">TDDA</a>:</strong> used for data profiling (automatic constraint generation and verification)</li>
+<li><strong>Audit trail:</strong> keep track of changes on how a dataset was derived</li>
+<li><strong>SDF approved:</strong> Information Governance trusts Miró implementation to manage data on the SH</li>
+</ul>
+</section>
+</section>
+<section id="getting-started" class="level1">
+<h1>Getting Started</h1>
+<!-- ------------------ Slide ------------------------ -->
+<section id="installation" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="installation">Installation</h2>
+<ul>
+<li><strong>Local installation</strong> requires a valid license. It is maintained in the GitHub repo <code>stochasticsolutions/artists</code>.</li>
+<li>In the <strong>Safe Haven</strong>, we all use symbolic links to Nick’s local installation, more details <a href="https://github.com/gofcoe/data-science-central/wiki/Miro#installation">here</a>.</li>
+</ul>
+<div class="fragment">
+<p>All your Miró datasets will be stored here:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">miro</span> <span class="at">-c</span> config repository</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Every session will have a log file you can recover from here:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">miro</span> <span class="at">-c</span> config baselogdir</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- ------------------ Slide ------------------------ -->
+</section>
+<section id="where-to-find-answers" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-find-answers">Where to find answers?</h2>
+<ol type="1">
+<li>Official documentation is available in the folder repo <code>artists</code></li>
+<li>The Miró faqs chat on Teams</li>
+<li>This <a href="https://github.com/gofcoe/data-science-central/wiki/Miro">wiki</a></li>
+<li>Typing:
+<ul>
+<li><code>help</code></li>
+<li><code>man COMMAND</code></li>
+<li><code>lisp FUNCTION</code></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="the-basics" class="level1">
+<h1>The Basics</h1>
+<!-- ------------------ Slide ------------------------ -->
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p>A new user variable is created using <code>setq</code> or its quiet form <code>setv</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setq</span> a 1</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">setv</span> b 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>setq</code> followed only by a variable prints its value:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setq</span> a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Global variables are defined using <code>global</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">global</span> a 1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- ------------------ Slide ------------------------ -->
+</section>
+<section id="data-types" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="data-types">Data types</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>int</strong></td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td><strong>real</strong></td>
+<td>5.6</td>
+</tr>
+<tr class="odd">
+<td><strong>bool</strong></td>
+<td>t, f</td>
+</tr>
+<tr class="even">
+<td><strong>string</strong></td>
+<td>“hello”</td>
+</tr>
+<tr class="odd">
+<td><strong>field</strong></td>
+<td>fld</td>
+</tr>
+<tr class="even">
+<td><strong>date</strong></td>
+<td>2022-09-10</td>
+</tr>
+<tr class="odd">
+<td><strong>list</strong></td>
+<td>(list 1 2 3)</td>
+</tr>
+<tr class="even">
+<td><strong>a-list</strong></td>
+<td>(a-list (list 1 “uno”) (list 2 “dos”) (list 3 “tres”))</td>
+</tr>
+<tr class="odd">
+<td><strong>dataset</strong></td>
+<td>dataset 2</td>
+</tr>
+</tbody>
+</table>
+<!-- ------------------ Slide ------------------------ -->
+</section>
+<section id="datasets-12" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="datasets-12">Datasets (1/2)</h2>
+<p>Datasets are the most important data type in Miró.</p>
+<table class="table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 57%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+<th>Long form</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>load</strong> filename</td>
+<td>Load a Miró file/dataset</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>unload</strong> dataset</td>
+<td>Load a Miró dataset</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>open</strong> filename</td>
+<td>Load metadata for dataset with data loaded lazily</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>save</strong> filename</td>
+<td>Save a Miró dataset</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>pwd</strong></td>
+<td>Print working dataset</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>cwd</strong></td>
+<td>Current working dataset</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>ls -l</strong></td>
+<td>List fields and their metadata</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>lsd</strong></td>
+<td>list datasets in your repository</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="datasets-22" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="datasets-22">Datasets (2/2)</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+<th>Long form</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>show</strong> N</td>
+<td>Show first N rows of the working dataset</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>tail</strong> N</td>
+<td>Show last N rows of the working dataset</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>sample</strong> N</td>
+<td>Show N random records</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>data</strong></td>
+<td>switch cwd or creates a new dataset</td>
+<td><strong>dataset</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="datasets-operations" class="level2">
+<h2 class="anchored" data-anchor-id="datasets-operations">Datasets Operations</h2>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+<th>Long form</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>def</strong> field</td>
+<td>Creates a new field</td>
+<td><strong>define</strong></td>
+</tr>
+<tr class="even">
+<td><strong>mv</strong></td>
+<td>Renames a field</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>rm</strong></td>
+<td>Removes a field</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>count</strong></td>
+<td>Counts the number of selected rows</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>bin</strong></td>
+<td>Bins a field</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>x</strong></td>
+<td>Crosstabs and visualizations</td>
+<td><strong>xtab</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lisp-like-operations" class="level2">
+<h2 class="anchored" data-anchor-id="lisp-like-operations">(lisp-like) operations</h2>
+<p><strong>Miró</strong> uses <strong>(lisp-like)</strong> expressions to perform vector operations on datasets fields. Lisp is the second oldest programming language after Fortran. It has a parenthesized prefix notation, for example this is how you add up two numbers:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="op">+</span> <span class="dv">1</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>similarly, this is how you add up two columns in Miró:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">load</span> ddd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>def newcol (<span class="op">+</span> odds even)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="functions" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="functions">Functions</h2>
+<p>In Miró there are two function types:</p>
+<section id="command" class="level4 smaller">
+<h4 class="smaller anchored" data-anchor-id="command">1) Command</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cmd my-function <span class="kw">string</span> var</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    echo Hello $var</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dmc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>then use it as:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my-function World</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="lisp-like-function" class="level4 smaller">
+<h4 class="smaller anchored" data-anchor-id="lisp-like-function">2) Lisp-like function</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">defun</span><span class="fu"> myfunction </span>(d) (<span class="op">+</span> <span class="st">"Hello "</span> d))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>then use it as:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(myfunction <span class="st">"World"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="loops" class="level2">
+<h2 class="anchored" data-anchor-id="loops">Loops</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode lisp code-with-copy"><code class="sourceCode commonlisp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">loop</span> (cli <span class="st">"echo"</span> <span class="st">"Hello"</span> x)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>           (x (<span class="kw">list</span> <span class="st">"World"</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Sailor"</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Hello"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="writing-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="writing-scripts">Writing Scripts</h2>
+<p>Let’s write a script called <code>myscript.miros</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource lisp number-lines code-with-copy"><code class="sourceCode commonlisp"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">setq</span> <span class="kw">first</span> (. $* <span class="dv">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">setq</span> <span class="kw">second</span> (. $* <span class="dv">2</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>(fail-if (<span class="kw">not</span> (<span class="op">=</span> (<span class="kw">length</span> $*) <span class="dv">3</span>))</span>
+<span id="cb13-5"><a href="#cb13-5"></a>          <span class="st">"USAGE: miro -f myscript VAR VAR "</span>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>(<span class="op">+</span> <span class="kw">first</span> <span class="kw">second</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<!-- ------------------ Slide ------------------------ -->
+</section>
+<section id="how-to-run-code" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-run-code">How to run code</h2>
+<ol type="1">
+<li>Executing code running Miró from the terminal typing <code>miro</code>.</li>
+<li>Starting the <strong>Salvador</strong> daemon running <code>mirod</code></li>
+<li>Writing a script (extension .miros) and running it on the terminal:</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">miro</span> <span class="at">-f</span> myscript</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>or from Salvador</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">.</span> <span class="at">-f</span> myscript Hello World</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="hands-on" class="level1">
+<h1>Hands On</h1>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<ol type="1">
+<li>Load a dataset (ddd or hillstrom)</li>
+<li>Check its metadata</li>
+<li>Create some calculated fields</li>
+<li>Filter some rows</li>
+<li>Save the new dataset as a miro dataset and csv</li>
+</ol>
+</section>
+<section id="future-sessions-topics" class="level2">
+<h2 class="anchored" data-anchor-id="future-sessions-topics">Future sessions topics</h2>
+<ol type="1">
+<li>Crosstabs</li>
+<li>Visualizations</li>
+<li>Metadata</li>
+<li>TDDA</li>
+<li>Reporting</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
