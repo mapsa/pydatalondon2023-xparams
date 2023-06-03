@@ -1,17 +1,20 @@
 /*-- scss:defaults --*/
 
-$body-bg: #ffffff;
-$body-color: #3d3b40;
+$body-bg: #ffffe0;
+$body-color: #393d43;
 $link-color: #0076ca;
-$presentation-heading-color: #1c3e55;
-$light-bg-text-color: #9c2e8f;
+$border-radius: 10px;
+$light-bg-text-color: #321f13;
 $code-block-font-size: 1em;
 $presentation-heading-letter-spacing	: normal;
+
 // $font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, Palatino !default;
 /*-- scss:rules --*/
 
 // headings
-$presentation-heading-color: #383d3d !default;
+// $presentation-heading-font: "Palatino Linotype", "Book Antiqua", Palatino,
+//   FreeSerif, serif !default;
+$presentation-heading-color: #8054e4 !default;
 
 .reveal .slide blockquote {
   border-left: 3px solid $text-muted;
@@ -20,7 +23,7 @@ $presentation-heading-color: #383d3d !default;
 
 .reveal strong, .reveal b {
   font-weight: bold;
-  color: rgb(139, 240, 243);
+  color: rgb(36, 34, 42);
   }
 
 .reveal .slide-logo {

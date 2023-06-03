@@ -1,33 +1,194 @@
 ---
 title: Effective parameter management with XParams
+subtitle: PyData London 2023
 # date: today
 author: 
     - Paola Arce
     - Victor Díaz
-format: 
+format:
   revealjs:
     slide-number: true
+    width: 1600
+    height: 900
     header-logo: "img/PyData_logo.png"
     logo: "img/SDF__Symbol Logo_Blue_RGB.png"
-    footer: PyData London 2023
-    theme: [night, custom.scss]
+    footer: "github.com/mapsa/pydatalondon2023-xparams"
+    theme: [default, custom.scss]
     highlight-style: github
     # slide-number: c/t
     toc-depth: 1
     # transition: slide
+    code-line-numbers: false
 filters:
     - reveal-header
 ---
 
 ## {background-color="white" background-image="img/authors.jpg" background-size="650px"}
 
+## {auto-animate="true"}
 
-## Motivation
+:::: {style="text-align: center; margin-top: 200px; font-size: 2em"}
+How to keep track of different configuration parameters?
+::::
+
+## {auto-animate="true"}
+
+:::: {style="text-align: center; margin-top: 200px; font-size: 2em"}
+How to keep track of different configuration parameters?
+
+INI vs **TOML** vs YAML
+::::
+
+## A basic configuration file {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+```toml
+title = "my title"
+
+[section]
+param1 = 2
+
+[section.subsection1]
+param1 = 500
+param2 = true
+param3 = "foo"
+param4 =[1, 2, 3]
+```
+:::
+
+## A basic configuration file {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+```toml
+title = "my title"
+
+[section]
+param1 = 2
+
+[section.subsection1]
+param1 = 500
+param2 = true
+param3 = "foo"
+param4 =[1, 2, 3]
+```
+
+ - configparser ❌
+ - toml ✅ 
+ - tomli ✅ 
+ - tomlib ✅ 
+:::
+
+
+
+## What if I want to validate data types? {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+```{.toml code-line-numbers="1"}
+title = false
+
+[section]
+param1 = 2
+
+[section.subsection1]
+param1 = 500
+param2 = true
+param3 = "foo"
+param4 =[1, 2, 3]
+```
+:::
+
+## What if I want to validate data types? {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+```{.toml code-line-numbers="1"}
+title = false
+
+[section]
+param1 = 2
+
+[section.subsection1]
+param1 = 500
+param2 = true
+param3 = "foo"
+param4 =[1, 2, 3]
+```
+
+ - toml ❌
+ - tomli ❌
+ - rtoml ✅ 
+ - pydantic ✅ 
+:::
+
+
+## But only some parameters differ from the defaults ... {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+
+```{.toml code-line-numbers="1,4"}
+title = "My new title"
+
+[section.subsection1]
+param2 = false
+```
+
+ - toml ❌
+ - tomli ❌
+ - rtoml ✅ 
+ - pydantic ✅ 
+:::
+
+
+## What if I want include a set of configuration files? {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+
+::: {layout-ncol=2}
+
+```{.toml code-line-numbers="1"}
+include = "config-prod"
+title = "My extended run"
+
+[section.subsection1]
+param5 = [1, 3, 5, 7, 9, 11]
+```
+
+ - toml ❌
+ - tomli ❌
+ - rtoml ❌
+ - pydantic ❌
+:::
+
+## What if I want to set a environment variable with the configuration file? {auto-animate="true" style="margin-top: 50px" background-color="white"}
+
+::: {layout-ncol=2}
+
+```bash
+XPARAMS=config-prod python myscript.py
+
+XPARAMS=config-prod make
+```
+
+ - toml ❌
+ - tomli ❌
+ - rtoml ❌
+ - pydantic ❌
+:::
+
 
 ## What is XParams?
 
 ## XParams in action
 
-## Key Features and Use Cases
+## {background-color="lightyellow"}
 
-# Thank you
+::: {style="text-align: center; margin-top: 200px; font-size: 5em"}
+
+Thank you 
+:::
+
+::: {style="text-align: center; margin-top: 100px; font-size: 1em"}
+Do you want to know when this code is open source? Get in touch:
+
+ [paola.arce@smartdatafoundry.com](paola.arce@smartdatafoundry.com)
+ 
+ [victor.diaz@smartdatafoundry.com](victor.diaz@smartdatafoundry.com)
+:::
