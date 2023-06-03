@@ -23,7 +23,7 @@ filters:
     - reveal-header
 ---
 
-## {background-color="white" background-image="img/authors.jpg" background-size="650px"}
+## {background-color="white" background-image="img/authors.jpg" background-size="950px"}
 
 ## {auto-animate="true"}
 
@@ -181,7 +181,7 @@ RUN=config-prod make
 
 ## What is XParams? {style="margin-top: 100px; font-size: 1.5em"}
 
-XParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy calle Aizle ( [https://aizle.ai](https://aizle.ai)).
+XParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy called Aizle ( [https://aizle.ai](https://aizle.ai)).
 
 ## XParams {style="margin-top:50px; font-size: 1.5em"}
 
