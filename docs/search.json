@@ -193,14 +193,14 @@
     "href": "index.html#a-basic-configuration-file-1",
     "title": "Effective parameter management with XParams",
     "section": "A basic configuration file",
-    "text": "A basic configuration file\n\n\n\ntitle = \"my title\"\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\nconfigparser ❌\ntoml ✅\ntomli ✅\ntomlib ✅"
+    "text": "A basic configuration file\n\n\n\ntitle = \"my title\"\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\nconfigparser ❌\ntoml ✅\ntomli ✅\ntomlib ✅\nXParams ✅"
   },
   {
     "objectID": "index.html#what-if-i-want-to-validate-data-types-1",
     "href": "index.html#what-if-i-want-to-validate-data-types-1",
     "title": "Effective parameter management with XParams",
     "section": "What if I want to validate data types?",
-    "text": "What if I want to validate data types?\n\n\n\ntitle = false\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+    "text": "What if I want to validate data types?\n\n\n\ntitle = false\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅\nXParams ✅"
   },
   {
     "objectID": "xparams-example.html",
@@ -228,14 +228,14 @@
     "href": "index.html#what-if-i-want-include-a-set-of-configuration-files",
     "title": "Effective parameter management with XParams",
     "section": "What if I want include a set of configuration files?",
-    "text": "What if I want include a set of configuration files?\n\n\n\ninclude = \"config-prod\"\ntitle = \"My extended run\"\n\n[section.subsection1]\nparam5 = [1, 3, 5, 7, 9, 11]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ❌\npydantic ❌"
+    "text": "What if I want include a set of configuration files?\n\n\n\ninclude = \"config-prod\"\ntitle = \"My extended run\"\n\n[section.subsection1]\nparam5 = [1, 3, 5, 7, 9, 11]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ❌\npydantic ❌\nXParams ✅"
   },
   {
     "objectID": "index.html#what-if-i-want-to-set-a-environment-variable-with-the-configuration-file",
     "href": "index.html#what-if-i-want-to-set-a-environment-variable-with-the-configuration-file",
     "title": "Effective parameter management with XParams",
     "section": "What if I want to set a environment variable with the configuration file?",
-    "text": "What if I want to set a environment variable with the configuration file?\n\n\n\nRUN=config-prod python myscript.py\n\nRUN=config-prod make\n\n\n\ntoml ❌\ntomli ❌\nrtoml ❌\npydantic ❌"
+    "text": "What if I want to set a environment variable with the configuration file?\n\n\n\nRUN=config-prod python myscript.py\n\nRUN=config-prod make\n\n\n\ntoml ❌\ntomli ❌\nrtoml ❌\npydantic ❌\nXParams ✅"
   },
   {
     "objectID": "index.html#but-only-some-parameters-are-different-from-the-defaults",
@@ -256,7 +256,7 @@
     "href": "index.html#but-only-some-parameters-differ-from-the-defaults",
     "title": "Effective parameter management with XParams",
     "section": "But only some parameters differ from the defaults …",
-    "text": "But only some parameters differ from the defaults …\n\n\n\ntitle = \"My new title\"\n\n[section.subsection1]\nparam2 = false\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+    "text": "But only some parameters differ from the defaults …\n\n\n\ntitle = \"My new title\"\n\n[section.subsection1]\nparam2 = false\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅\nXParams ✅"
   },
   {
     "objectID": "index.html#thank-you",
@@ -361,34 +361,76 @@
     "href": "index.html#xparams-in-action-11",
     "title": "Effective parameter management with XParams",
     "section": "XParams in action",
-    "text": "XParams in action\nI don’t want to change my script everytime"
+    "text": "XParams in action\nUsing iteration1.toml:\n\n\n\ninclude = 'myrun'\n\n[section.subsection2.param5]\nvar1 = 5"
   },
   {
     "objectID": "index.html#xparams-in-action-12",
     "href": "index.html#xparams-in-action-12",
     "title": "Effective parameter management with XParams",
     "section": "XParams in action",
-    "text": "XParams in action\nYou don’t need to!!!"
+    "text": "XParams in action\nUsing iteration1.toml:\n\n\n\ninclude = 'myrun'\n\n[section.subsection2.param5]\nvar1 = 5\n\n\nparams = XParams(\n    defaults,\n    name='iteration1',\n    user_params_dir=\"config\"\n)"
   },
   {
     "objectID": "index.html#xparams-in-action-13",
     "href": "index.html#xparams-in-action-13",
     "title": "Effective parameter management with XParams",
     "section": "XParams in action",
-    "text": "XParams in action\nYou don’t need to!!!\n\n\n\nparams = XParams(\n    defaults,\n    user_params_dir=\"config\"\n)"
+    "text": "XParams in action\nUsing iteration1.toml:\n\n\n\ninclude = 'myrun'\n\n[section.subsection2.param5]\nvar1 = 5\n\n\nparams = XParams(\n    defaults,\n    name='iteration1',\n    user_params_dir=\"config\"\n)\n\n\n\n&gt;&gt;&gt; params.section.subsection1.param1\n&gt;&gt;&gt; 1900000\n&gt;&gt;&gt; params.section.subsection2.param5.get_params()\n&gt;&gt;&gt; {'var1': 5, 'var2': '2'}"
   },
   {
     "objectID": "index.html#xparams-in-action-14",
     "href": "index.html#xparams-in-action-14",
     "title": "Effective parameter management with XParams",
     "section": "XParams in action",
-    "text": "XParams in action\nYou don’t need to!!!\n\n\n\nparams = XParams(\n    defaults,\n    user_params_dir=\"config\"\n)\n\n\nXPARAMS=myrun python myscript.py"
+    "text": "XParams in action\nI don’t want to change my script everytime"
   },
   {
     "objectID": "index.html#xparams-in-action-15",
     "href": "index.html#xparams-in-action-15",
     "title": "Effective parameter management with XParams",
     "section": "XParams in action",
-    "text": "XParams in action\nYou don’t need to!!!\n\n\n\nparams = XParams(\n    defaults,\n    user_params_dir=\"config\"\n)\n\n\nXPARAMS=myrun python myscript.py\n\n\n\n&gt;&gt;&gt; params.section.subsection1.param1\n&gt;&gt;&gt; 1900000\n&gt;&gt;&gt; params.section.subsection2.param5.get_params()\n&gt;&gt;&gt; {'var1': 2, 'var2': '2'}"
+    "text": "XParams in action\nYou don’t need to!!!"
+  },
+  {
+    "objectID": "index.html#xparams-features",
+    "href": "index.html#xparams-features",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams features",
+    "text": "XParams features\n\n\n\n\nSupported features\ncheck\n\n\n\n\nuse of TOML files\n✅\n\n\nnested complex structure\n✅\n\n\ntype checking at any level\n✅"
+  },
+  {
+    "objectID": "index.html#xparams",
+    "href": "index.html#xparams",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams",
+    "text": "XParams\n\n\n\n\nSupported features\ncheck\n\n\n\n\nuse of TOML files\n✅\n\n\ninclusion of mutiple TOML files\n✅\n\n\nnested complex structure\n✅\n\n\nenvironment variable\n✅\n\n\ntype checking at any level\n✅"
+  },
+  {
+    "objectID": "index.html#xparams-auto-animatetrue-stylemargin-top-50px-background-colorwhite-font-size-1.5em",
+    "href": "index.html#xparams-auto-animatetrue-stylemargin-top-50px-background-colorwhite-font-size-1.5em",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams {auto-animate=“true” style=“margin-top: 50px” background-color=“white” font-size: 1.5em”}",
+    "text": "XParams {auto-animate=“true” style=“margin-top: 50px” background-color=“white” font-size: 1.5em”}\n\n\n\n\nSupported features\ncheck\n\n\n\n\nuse of TOML files\n✅\n\n\nnested complex structure\n✅\n\n\nenvironment variable\n✅\n\n\ntype checking at any level\n✅"
+  },
+  {
+    "objectID": "index.html#xparams-in-action-16",
+    "href": "index.html#xparams-in-action-16",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams in action",
+    "text": "XParams in action\nYou don’t need to!!!\n\n\n\nparams = XParams(\n    defaults,\n    user_params_dir=\"config\"\n)"
+  },
+  {
+    "objectID": "index.html#xparams-in-action-17",
+    "href": "index.html#xparams-in-action-17",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams in action",
+    "text": "XParams in action\nYou don’t need to!!!\n\n\n\nparams = XParams(\n    defaults,\n    user_params_dir=\"config\"\n)\n\n\nXPARAMS=iteration1 python myscript.py"
+  },
+  {
+    "objectID": "index.html#xparams-in-action-18",
+    "href": "index.html#xparams-in-action-18",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams in action",
+    "text": "XParams in action\nYou don’t need to!!!\n\n\n\nparams = XParams(\n    defaults,\n    user_params_dir=\"config\"\n)\n\n\nXPARAMS=iteration1 python myscript.py\n\n\n\n&gt;&gt;&gt; params.section.subsection1.param1\n&gt;&gt;&gt; 1900000\n&gt;&gt;&gt; params.section.subsection2.param5.get_params()\n&gt;&gt;&gt; {'var1': 5, 'var2': '2'}"
   }
 ]

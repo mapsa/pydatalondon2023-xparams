@@ -468,6 +468,7 @@ Victor Díaz
 <li>toml ✅</li>
 <li>tomli ✅</li>
 <li>tomlib ✅</li>
+<li>XParams ✅</li>
 </ul>
 </div>
 </div>
@@ -514,6 +515,7 @@ Victor Díaz
 <li>tomli ❌</li>
 <li>rtoml ✅</li>
 <li>pydantic ✅</li>
+<li>XParams ✅</li>
 </ul>
 </div>
 </div>
@@ -535,6 +537,7 @@ Victor Díaz
 <li>tomli ❌</li>
 <li>rtoml ✅</li>
 <li>pydantic ✅</li>
+<li>XParams ✅</li>
 </ul>
 </div>
 </div>
@@ -557,6 +560,7 @@ Victor Díaz
 <li>tomli ❌</li>
 <li>rtoml ❌</li>
 <li>pydantic ❌</li>
+<li>XParams ✅</li>
 </ul>
 </div>
 </div>
@@ -577,6 +581,7 @@ Victor Díaz
 <li>tomli ❌</li>
 <li>rtoml ❌</li>
 <li>pydantic ❌</li>
+<li>XParams ✅</li>
 </ul>
 </div>
 </div>
@@ -585,6 +590,41 @@ Victor Díaz
 <section id="what-is-xparams" class="slide level2" style="margin-top: 100px; font-size: 1.5em">
 <h2>What is XParams?</h2>
 <p>XParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy calle Aizle ( <a href="https://aizle.ai">https://aizle.ai</a>).</p>
+</section>
+<section id="xparams" class="slide level2" style="margin-top:50px; font-size: 1.5em">
+<h2>XParams</h2>
+<div style="text-align: center; margin-top: 100px; font-size: .8em">
+<table>
+<thead>
+<tr class="header">
+<th>Supported features</th>
+<th>check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>use of <code>TOML</code> files</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>inclusion of mutiple <code>TOML</code> files</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>nested complex structure</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>environment variable</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>type checking at any level</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="xparams-in-action" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
 <h2 data-id="quarto-animate-title">XParams in action</h2>
@@ -782,63 +822,123 @@ Victor Díaz
 </section>
 <section id="xparams-in-action-11" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
 <h2 data-id="quarto-animate-title">XParams in action</h2>
-<h3 id="i-dont-want-to-change-my-script-everytime"><strong>I don’t want to change my script everytime</strong></h3>
+<h3 id="using-iteration1.toml">Using <code>iteration1.toml</code>:</h3>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb23"><pre class="sourceCode toml code-with-copy" data-id="quarto-animate-code"><code class="sourceCode toml hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">include</span> <span class="op">=</span> <span class="st">'</span><span class="vs">myrun</span><span class="st">'</span></span>
+<span id="cb23-2" class="hljs-ln-code"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3" class="hljs-ln-code"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">section</span><span class="kw">.</span><span class="dt">subsection2</span><span class="kw">.</span><span class="dt">param5</span><span class="kw">]</span></span>
+<span id="cb23-4" class="hljs-ln-code"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="dt">var1</span> <span class="op">=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="xparams-in-action-12" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
 <h2 data-id="quarto-animate-title">XParams in action</h2>
-<h3 id="you-dont-need-to"><strong>You don’t need to!!!</strong></h3>
-</section>
-<section id="xparams-in-action-13" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
-<h2 data-id="quarto-animate-title">XParams in action</h2>
-<h3 id="you-dont-need-to-1"><strong>You don’t need to!!!</strong></h3>
+<h3 id="using-iteration1.toml-1">Using <code>iteration1.toml</code>:</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb23-1" class="hljs-ln-code"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
-<span id="cb23-2" class="hljs-ln-code"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
-<span id="cb23-3" class="hljs-ln-code"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
-<span id="cb23-4" class="hljs-ln-code"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="xparams-in-action-14" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
-<h2 data-id="quarto-animate-title">XParams in action</h2>
-<h3 id="you-dont-need-to-2"><strong>You don’t need to!!!</strong></h3>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">include</span> <span class="op">=</span> <span class="st">'</span><span class="vs">myrun</span><span class="st">'</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">section</span><span class="kw">.</span><span class="dt">subsection2</span><span class="kw">.</span><span class="dt">param5</span><span class="kw">]</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="dt">var1</span> <span class="op">=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="va">XPARAMS</span><span class="op">=</span>myrun <span class="ex">python</span> myscript.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'iteration1'</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="xparams-in-action-15" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
+<section id="xparams-in-action-13" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
 <h2 data-id="quarto-animate-title">XParams in action</h2>
-<h3 id="you-dont-need-to-3"><strong>You don’t need to!!!</strong></h3>
+<h3 id="using-iteration1.toml-2">Using <code>iteration1.toml</code>:</h3>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">include</span> <span class="op">=</span> <span class="st">'</span><span class="vs">myrun</span><span class="st">'</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">section</span><span class="kw">.</span><span class="dt">subsection2</span><span class="kw">.</span><span class="dt">param5</span><span class="kw">]</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dt">var1</span> <span class="op">=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="va">XPARAMS</span><span class="op">=</span>myrun <span class="ex">python</span> myscript.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'iteration1'</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> params.section.subsection1.param1</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1900000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> params.section.subsection2.param5.get_params()</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> {<span class="st">'var1'</span>: <span class="dv">2</span>, <span class="st">'var2'</span>: <span class="st">'2'</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> {<span class="st">'var1'</span>: <span class="dv">5</span>, <span class="st">'var2'</span>: <span class="st">'2'</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="xparams-in-action-14" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
+<h2 data-id="quarto-animate-title">XParams in action</h2>
+<h3 id="i-dont-want-to-change-my-script-everytime"><strong>I don’t want to change my script everytime</strong></h3>
+</section>
+<section id="xparams-in-action-15" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
+<h2 data-id="quarto-animate-title">XParams in action</h2>
+<h3 id="you-dont-need-to"><strong>You don’t need to!!!</strong></h3>
+</section>
+<section id="xparams-in-action-16" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
+<h2 data-id="quarto-animate-title">XParams in action</h2>
+<h3 id="you-dont-need-to-1"><strong>You don’t need to!!!</strong></h3>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy" data-id="quarto-animate-code"><code class="sourceCode python hljs"><span id="cb30-1" class="hljs-ln-code"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
+<span id="cb30-2" class="hljs-ln-code"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
+<span id="cb30-3" class="hljs-ln-code"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
+<span id="cb30-4" class="hljs-ln-code"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="xparams-in-action-17" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
+<h2 data-id="quarto-animate-title">XParams in action</h2>
+<h3 id="you-dont-need-to-2"><strong>You don’t need to!!!</strong></h3>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="va">XPARAMS</span><span class="op">=</span>iteration1 <span class="ex">python</span> myscript.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="xparams-in-action-18" class="slide level2" data-auto-animate="true" style="margin-top: 50px" data-background-color="white">
+<h2 data-id="quarto-animate-title">XParams in action</h2>
+<h3 id="you-dont-need-to-3"><strong>You don’t need to!!!</strong></h3>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> XParams(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    defaults,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    user_params_dir<span class="op">=</span><span class="st">"config"</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="va">XPARAMS</span><span class="op">=</span>iteration1 <span class="ex">python</span> myscript.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> params.section.subsection1.param1</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="dv">1900000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> params.section.subsection2.param5.get_params()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> {<span class="st">'var1'</span>: <span class="dv">5</span>, <span class="st">'var2'</span>: <span class="st">'2'</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="section-3" class="slide level2" data-background-color="lightyellow">
 <h2></h2>
