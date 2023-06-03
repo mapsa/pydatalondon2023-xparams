@@ -18,7 +18,7 @@
     "href": "index.html#what-is-xparams",
     "title": "Effective parameter management with XParams",
     "section": "What is XParams?",
-    "text": "What is XParams?\nXParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy calle Aizle ( https://aizle.ai)."
+    "text": "What is XParams?\nXParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy called Aizle ( https://aizle.ai)."
   },
   {
     "objectID": "index.html#xparams-in-action",
