@@ -298,7 +298,7 @@
     "href": "index.html#xparams-in-action-2",
     "title": "Effective parameter management with XParams",
     "section": "XParams in action",
-    "text": "XParams in action\nfrom xparams import XParams\n\nparams = XParams(defaults, user_params_dir=\"config\")"
+    "text": "XParams in action\nfrom xparams import XParams\n\nparams = XParams(defaults)"
   },
   {
     "objectID": "index.html#xparams-in-action-3",

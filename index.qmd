@@ -224,7 +224,7 @@ defaults = {
 ```python
 from xparams import XParams
 
-params = XParams(defaults, user_params_dir="config")
+params = XParams(defaults)
 ```
 
 
