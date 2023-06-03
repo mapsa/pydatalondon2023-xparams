@@ -1,0 +1,252 @@
+---
+title: Effective parameter management with XParams
+# date: today
+author: 
+    - Paola Arce
+    - Victor Díaz
+format: 
+  revealjs:
+    slide-number: true
+    logo: "img/PyData_logo.png"
+    footer: PyData London 2023
+    theme: [night, custom.scss]
+    highlight-style: github
+    # slide-number: c/t
+    toc: true
+    toc-depth: 1
+    # transition: slide
+---
+
+# Introduction
+
+<!-- ------------------ Slide ------------------------ -->
+## What is it?
+
+::: {layout="[[60, 40], [100]]"}
+[Miró](https://stochasticsolutions.com/miro/) is a data analysis software developed and maintained by our own Nick Radcliffe.
+
+![](img/Miro-logo.png)
+
+It has been written in Python and supports command line expressions and (lisp-like) functions.
+:::
+
+
+<!-- ------------------ Slide ------------------------ -->
+## The Artists {background-color="black" background-opacity=0.3 background-image="img/catalan-landscape.jpg"}
+
+Miró is part of The Artists Software Suite:
+
+- **[Miró:]()** data analysis (extraction, manipulation, exploration, reporting, prediction and test-driven data analysis (TDDA))
+- **Klee:** visualization
+- **Rothko:** optimization services
+- **Giacometti:** infrastructure
+- **Salvador:** web interface
+
+<!-- ------------------ Slide ------------------------ -->
+## Why Miró?
+
+- **Column-Oriented Storage:** is optimized for column operations (statistics, derived fields and xtabs), whereas row operations can be quite slow
+- **[TDDA](https://tdda.readthedocs.io/en/latest/):** used for data profiling (automatic constraint generation and verification)
+- **Audit trail:** keep track of changes on how a dataset was derived 
+- **SDF approved:** Information Governance trusts Miró implementation to manage data on the SH
+
+# Getting Started
+<!-- ------------------ Slide ------------------------ -->
+## Installation{.smaller}
+
+* **Local installation** requires a valid license. It is maintained in the GitHub repo `stochasticsolutions/artists`.
+* In the **Safe Haven**, we all use symbolic links to Nick's local installation, more details [here](https://github.com/gofcoe/data-science-central/wiki/Miro#installation).
+
+:::{.fragment}
+All your Miró datasets will be stored here:
+```{.bash} 
+miro -c config repository
+```
+Every session will have a log file you can recover from here:
+```{.bash}
+miro -c config baselogdir
+```
+:::
+
+<!-- ------------------ Slide ------------------------ -->
+## Where to find answers?
+
+1. Official documentation is available in the folder repo `artists`
+2. The Miró faqs chat on Teams
+3. This [wiki](https://github.com/gofcoe/data-science-central/wiki/Miro)
+4. Typing:
+    - `help`
+    - `man COMMAND`
+    - `lisp FUNCTION`
+
+
+# The Basics  
+<!-- ------------------ Slide ------------------------ -->
+## Variables
+
+A new user variable is created using `setq` or its quiet form `setv`:
+
+```{.bash}
+setq a 1
+setv b 2
+```
+
+`setq` followed only by a variable prints its value:
+
+```{.bash}
+setq a
+```
+
+Global variables are defined using `global`:
+
+```{.bash}
+global a 1 
+```
+
+<!-- ------------------ Slide ------------------------ -->
+## Data types {.smaller}
+
+| Type | Example |
+| --------- | ------- |
+| **int** | 3 |
+| **real** | 5.6 |
+| **bool** | t, f |
+| **string** | "hello" |
+| **field** | fld |
+| **date** | 2022-09-10 |
+| **list** | (list 1 2 3) |
+| **a-list** | (a-list (list 1 "uno") (list 2 "dos") (list 3 "tres")) |
+| **dataset** | dataset 2|
+
+
+<!-- ------------------ Slide ------------------------ -->
+## Datasets (1/2){.smaller}
+
+Datasets are the most important data type in Miró. 
+
+| Command | Description | Long form |
+| ------- | ----------- | - |
+| **load** filename | Load a Miró file/dataset |
+| **unload** dataset | Load a Miró dataset |
+| **open** filename   | Load metadata for dataset with data loaded lazily |
+| **save** filename   | Save a Miró dataset |
+| **pwd**     | Print working dataset |
+| **cwd**     | Current working dataset |
+| **ls -l**   | List fields and their metadata |
+| **lsd**     | list datasets in your repository|
+
+## Datasets (2/2){.smaller}
+
+| Command | Description | Long form |
+| ------- | ----------- | - |
+| **show** N | Show first N rows of the working dataset |
+| **tail** N | Show last N rows of the working dataset |
+| **sample** N | Show N random records|
+| **data** | switch cwd or creates a new dataset| **dataset** |
+
+## Datasets Operations
+
+| Command | Description | Long form |
+| ------- | ----------- | - |
+| **def** field | Creates a new field| **define** |
+| **mv** | Renames a field |
+| **rm** | Removes a field |
+| **count**| Counts the number of selected rows|
+| **bin** | Bins a field|
+| **x**| Crosstabs and visualizations | **xtab** |
+
+## (lisp-like) operations
+
+**Miró** uses **(lisp-like)** expressions to perform vector operations on datasets fields. Lisp is the second oldest programming language after Fortran. It has a parenthesized prefix notation, for example this is how you add up two numbers:
+
+```{.lisp}
+(+ 1 2)
+```
+
+similarly, this is how you add up two columns in Miró:
+
+```{.lisp}
+load ddd
+def newcol (+ odds even)
+```
+
+## Functions{.smaller}
+In Miró there are two function types:
+
+#### 1) Command{.smaller}
+```{.lisp}
+cmd my-function string var
+    echo Hello $var
+dmc
+```
+then use it as:
+```{.lisp}
+my-function World
+```
+#### 2) Lisp-like function{.smaller}
+```{.lisp}
+(defun myfunction (d) (+ "Hello " d))
+```
+then use it as:
+
+```{.lisp}
+(myfunction "World")
+```
+
+## Loops
+
+
+
+```{.lisp}
+(loop (cli "echo" "Hello" x)
+           (x (list "World" 
+                    "Sailor" 
+                    "Hello")))
+```
+## Writing Scripts
+
+Let's write a script called `myscript.miros`
+```{.lisp code-line-numbers="1|2|4|5|"}
+setq first (. $* 1)
+setq second (. $* 2)
+
+(fail-if (not (= (length $*) 3))
+          "USAGE: miro -f myscript VAR VAR ")
+
+(+ first second)
+```
+
+<!-- ------------------ Slide ------------------------ -->
+## How to run code
+
+1. Executing code running Miró from the terminal typing `miro`.
+1. Starting the **Salvador** daemon running `mirod`
+1. Writing a script (extension .miros) and running it on the terminal:
+
+```{.bash}
+miro -f myscript
+```
+
+or from Salvador
+
+```{.bash}
+. -f myscript Hello World
+```
+
+
+# Hands On
+
+## Exercise
+
+1. Load a dataset (ddd or hillstrom)
+1. Check its metadata
+1. Create some calculated fields
+1. Filter some rows
+1. Save the new dataset as a miro dataset and csv
+
+## Future sessions topics
+1. Crosstabs
+1. Visualizations
+1. Metadata
+1. TDDA
+1. Reporting

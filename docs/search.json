@@ -1,0 +1,289 @@
+[
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Effective parameter management with XParams",
+    "section": "Introduction",
+    "text": "Introduction\n{fig-align=“center”, width=300}"
+  },
+  {
+    "objectID": "index.html#motivation",
+    "href": "index.html#motivation",
+    "title": "Effective parameter management with XParams",
+    "section": "Motivation",
+    "text": "Motivation"
+  },
+  {
+    "objectID": "index.html#what-is-xparams",
+    "href": "index.html#what-is-xparams",
+    "title": "Effective parameter management with XParams",
+    "section": "What is XParams?",
+    "text": "What is XParams?\nXParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy calle Aizle ( https://aizle.ai)."
+  },
+  {
+    "objectID": "index.html#xparams-in-action",
+    "href": "index.html#xparams-in-action",
+    "title": "Effective parameter management with XParams",
+    "section": "XParams in action",
+    "text": "XParams in action"
+  },
+  {
+    "objectID": "index.html#key-features-and-use-cases",
+    "href": "index.html#key-features-and-use-cases",
+    "title": "Effective parameter management with XParams",
+    "section": "Key Features and Use Cases",
+    "text": "Key Features and Use Cases"
+  },
+  {
+    "objectID": "index copy.html",
+    "href": "index copy.html",
+    "title": "Effective parameter management with XParams",
+    "section": "",
+    "text": "Miró is a data analysis software developed and maintained by our own Nick Radcliffe.\n\n\n\n\n\n\n\nIt has been written in Python and supports command line expressions and (lisp-like) functions.\n\n\n\n\n\n\n\nMiró is part of The Artists Software Suite:\n\nMiró: data analysis (extraction, manipulation, exploration, reporting, prediction and test-driven data analysis (TDDA))\nKlee: visualization\nRothko: optimization services\nGiacometti: infrastructure\nSalvador: web interface\n\n\n\n\n\n\nColumn-Oriented Storage: is optimized for column operations (statistics, derived fields and xtabs), whereas row operations can be quite slow\nTDDA: used for data profiling (automatic constraint generation and verification)\nAudit trail: keep track of changes on how a dataset was derived\nSDF approved: Information Governance trusts Miró implementation to manage data on the SH"
+  },
+  {
+    "objectID": "index copy.html#installation",
+    "href": "index copy.html#installation",
+    "title": "Effective parameter management with XParams",
+    "section": "Installation",
+    "text": "Installation\n\nLocal installation requires a valid license. It is maintained in the GitHub repo stochasticsolutions/artists.\nIn the Safe Haven, we all use symbolic links to Nick’s local installation, more details here.\n\n\nAll your Miró datasets will be stored here:\nmiro -c config repository\nEvery session will have a log file you can recover from here:\nmiro -c config baselogdir"
+  },
+  {
+    "objectID": "index copy.html#where-to-find-answers",
+    "href": "index copy.html#where-to-find-answers",
+    "title": "Effective parameter management with XParams",
+    "section": "Where to find answers?",
+    "text": "Where to find answers?\n\nOfficial documentation is available in the folder repo artists\nThe Miró faqs chat on Teams\nThis wiki\nTyping:\n\nhelp\nman COMMAND\nlisp FUNCTION"
+  },
+  {
+    "objectID": "index copy.html#variables",
+    "href": "index copy.html#variables",
+    "title": "Effective parameter management with XParams",
+    "section": "Variables",
+    "text": "Variables\nA new user variable is created using setq or its quiet form setv:\nsetq a 1\nsetv b 2\nsetq followed only by a variable prints its value:\nsetq a\nGlobal variables are defined using global:\nglobal a 1"
+  },
+  {
+    "objectID": "index copy.html#data-types",
+    "href": "index copy.html#data-types",
+    "title": "Effective parameter management with XParams",
+    "section": "Data types",
+    "text": "Data types\n\n\n\nType\nExample\n\n\n\n\nint\n3\n\n\nreal\n5.6\n\n\nbool\nt, f\n\n\nstring\n“hello”\n\n\nfield\nfld\n\n\ndate\n2022-09-10\n\n\nlist\n(list 1 2 3)\n\n\na-list\n(a-list (list 1 “uno”) (list 2 “dos”) (list 3 “tres”))\n\n\ndataset\ndataset 2"
+  },
+  {
+    "objectID": "index copy.html#datasets-12",
+    "href": "index copy.html#datasets-12",
+    "title": "Effective parameter management with XParams",
+    "section": "Datasets (1/2)",
+    "text": "Datasets (1/2)\nDatasets are the most important data type in Miró.\n\n\n\n\n\n\n\n\nCommand\nDescription\nLong form\n\n\n\n\nload filename\nLoad a Miró file/dataset\n\n\n\nunload dataset\nLoad a Miró dataset\n\n\n\nopen filename\nLoad metadata for dataset with data loaded lazily\n\n\n\nsave filename\nSave a Miró dataset\n\n\n\npwd\nPrint working dataset\n\n\n\ncwd\nCurrent working dataset\n\n\n\nls -l\nList fields and their metadata\n\n\n\nlsd\nlist datasets in your repository"
+  },
+  {
+    "objectID": "index copy.html#datasets-22",
+    "href": "index copy.html#datasets-22",
+    "title": "Effective parameter management with XParams",
+    "section": "Datasets (2/2)",
+    "text": "Datasets (2/2)\n\n\n\nCommand\nDescription\nLong form\n\n\n\n\nshow N\nShow first N rows of the working dataset\n\n\n\ntail N\nShow last N rows of the working dataset\n\n\n\nsample N\nShow N random records\n\n\n\ndata\nswitch cwd or creates a new dataset\ndataset"
+  },
+  {
+    "objectID": "index copy.html#datasets-operations",
+    "href": "index copy.html#datasets-operations",
+    "title": "Effective parameter management with XParams",
+    "section": "Datasets Operations",
+    "text": "Datasets Operations\n\n\n\nCommand\nDescription\nLong form\n\n\n\n\ndef field\nCreates a new field\ndefine\n\n\nmv\nRenames a field\n\n\n\nrm\nRemoves a field\n\n\n\ncount\nCounts the number of selected rows\n\n\n\nbin\nBins a field\n\n\n\nx\nCrosstabs and visualizations\nxtab"
+  },
+  {
+    "objectID": "index copy.html#lisp-like-operations",
+    "href": "index copy.html#lisp-like-operations",
+    "title": "Effective parameter management with XParams",
+    "section": "(lisp-like) operations",
+    "text": "(lisp-like) operations\nMiró uses (lisp-like) expressions to perform vector operations on datasets fields. Lisp is the second oldest programming language after Fortran. It has a parenthesized prefix notation, for example this is how you add up two numbers:\n(+ 1 2)\nsimilarly, this is how you add up two columns in Miró:\nload ddd\ndef newcol (+ odds even)"
+  },
+  {
+    "objectID": "index copy.html#functions",
+    "href": "index copy.html#functions",
+    "title": "Effective parameter management with XParams",
+    "section": "Functions",
+    "text": "Functions\nIn Miró there are two function types:\n\n1) Command\ncmd my-function string var\n    echo Hello $var\ndmc\nthen use it as:\nmy-function World\n\n\n2) Lisp-like function\n(defun myfunction (d) (+ \"Hello \" d))\nthen use it as:\n(myfunction \"World\")"
+  },
+  {
+    "objectID": "index copy.html#loops",
+    "href": "index copy.html#loops",
+    "title": "Effective parameter management with XParams",
+    "section": "Loops",
+    "text": "Loops\n(loop (cli \"echo\" \"Hello\" x)\n           (x (list \"World\" \n                    \"Sailor\" \n                    \"Hello\")))"
+  },
+  {
+    "objectID": "index copy.html#writing-scripts",
+    "href": "index copy.html#writing-scripts",
+    "title": "Effective parameter management with XParams",
+    "section": "Writing Scripts",
+    "text": "Writing Scripts\nLet’s write a script called myscript.miros\nsetq first (. $* 1)\nsetq second (. $* 2)\n\n(fail-if (not (= (length $*) 3))\n          \"USAGE: miro -f myscript VAR VAR \")\n\n(+ first second)"
+  },
+  {
+    "objectID": "index copy.html#how-to-run-code",
+    "href": "index copy.html#how-to-run-code",
+    "title": "Effective parameter management with XParams",
+    "section": "How to run code",
+    "text": "How to run code\n\nExecuting code running Miró from the terminal typing miro.\nStarting the Salvador daemon running mirod\nWriting a script (extension .miros) and running it on the terminal:\n\nmiro -f myscript\nor from Salvador\n. -f myscript Hello World"
+  },
+  {
+    "objectID": "index copy.html#exercise",
+    "href": "index copy.html#exercise",
+    "title": "Effective parameter management with XParams",
+    "section": "Exercise",
+    "text": "Exercise\n\nLoad a dataset (ddd or hillstrom)\nCheck its metadata\nCreate some calculated fields\nFilter some rows\nSave the new dataset as a miro dataset and csv"
+  },
+  {
+    "objectID": "index copy.html#future-sessions-topics",
+    "href": "index copy.html#future-sessions-topics",
+    "title": "Effective parameter management with XParams",
+    "section": "Future sessions topics",
+    "text": "Future sessions topics\n\nCrosstabs\nVisualizations\nMetadata\nTDDA\nReporting"
+  },
+  {
+    "objectID": "index.html#section-1",
+    "href": "index.html#section-1",
+    "title": "Effective parameter management with XParams",
+    "section": "",
+    "text": "How to keep track of different configuration parameters?"
+  },
+  {
+    "objectID": "index.html#section-2",
+    "href": "index.html#section-2",
+    "title": "Effective parameter management with XParams",
+    "section": "",
+    "text": "How to keep track of different configuration parameters?\nINI vs TOML vs YAML"
+  },
+  {
+    "objectID": "index.html#section-3",
+    "href": "index.html#section-3",
+    "title": "Effective parameter management with XParams",
+    "section": "",
+    "text": "Thank you\n\n\nDo you want to know when this code is open source? Get in touch:\npaola.arce@smartdatafoundry.com\nvictor.diaz@smartdatafoundry.com\nMore info about Smart Data Foundry and the product we are developing here:\nhttps://smartdatafoundry.com\nhttps://aizle.ai\n\n\n\n\ngithub.com/mapsa/pydatalondon2023-xparams"
+  },
+  {
+    "objectID": "index.html#a-basic-toml-file",
+    "href": "index.html#a-basic-toml-file",
+    "title": "Effective parameter management with XParams",
+    "section": "A basic toml file",
+    "text": "A basic toml file\n\n\n\ntitle = \"my title\"\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]"
+  },
+  {
+    "objectID": "index.html#a-basic-toml-file-1",
+    "href": "index.html#a-basic-toml-file-1",
+    "title": "Effective parameter management with XParams",
+    "section": "A basic toml file",
+    "text": "A basic toml file\n\n\n\nparam = \"myparam\"\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\nMy options\n\nconfigparser ❌\ntomli ✅"
+  },
+  {
+    "objectID": "index.html#a-basic-configuration-file",
+    "href": "index.html#a-basic-configuration-file",
+    "title": "Effective parameter management with XParams",
+    "section": "A basic configuration file",
+    "text": "A basic configuration file\n\n\n\ntitle = \"my title\"\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]"
+  },
+  {
+    "objectID": "index.html#what-if-i-want-to-validate-data-types",
+    "href": "index.html#what-if-i-want-to-validate-data-types",
+    "title": "Effective parameter management with XParams",
+    "section": "What if I want to validate data types?",
+    "text": "What if I want to validate data types?\n\n\n\ntitle = false\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]"
+  },
+  {
+    "objectID": "index.html#a-basic-configuration-file-1",
+    "href": "index.html#a-basic-configuration-file-1",
+    "title": "Effective parameter management with XParams",
+    "section": "A basic configuration file",
+    "text": "A basic configuration file\n\n\n\ntitle = \"my title\"\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\nconfigparser ❌\ntoml ✅\ntomli ✅\ntomlib ✅"
+  },
+  {
+    "objectID": "index.html#what-if-i-want-to-validate-data-types-1",
+    "href": "index.html#what-if-i-want-to-validate-data-types-1",
+    "title": "Effective parameter management with XParams",
+    "section": "What if I want to validate data types?",
+    "text": "What if I want to validate data types?\n\n\n\ntitle = false\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+  },
+  {
+    "objectID": "xparams-example.html",
+    "href": "xparams-example.html",
+    "title": "",
+    "section": "",
+    "text": "from datetime import date\nfrom pprint import pprint\n\nfrom xparams import XParams\n\n\ndefaults = {\n    \"param\": \"myparam\",\n    \"section\": {\n        \"subsection1\": {\n            \"param1\": 500,\n            \"param2\": True,\n            \"param3\": \"foo\",\n            \"param4\": [1, 2, 3],\n        },\n        \"subsection2\": {\n            \"param1\": False,\n            \"param2\": 2.0,\n            \"param3\": date(2023, 6, 3),\n            \"param4\": -1,\n            \"param5\": {\n                \"var1\": 1,\n                \"var2\": \"2\",\n            },\n        },\n    },\n}\n\n\n\n\nparams = XParams(defaults, user_params_dir=\"config\", verbose=False)\n\n\nparams.section.subsection1.get_params()\n\n{'param1': 500, 'param2': True, 'param3': 'foo', 'param4': [1, 2, 3]}\n\n\n\nparams.section.subsection2.param5.get_params()\n\n{'var1': 1, 'var2': '2'}\n\n\n\n\n\n\nContent myrun.toml:\n\n[section.subsection1]\nparam1 = 1_900_000\nparam3 = \"bar\"\n\n\n[section.subsection2.param5]\nvar1 = 2\n\nparams = XParams(defaults, name=\"myrun\", user_params_dir=\"config\")\n\nParameters set from: /Users/vdiaz/repos/vadrienzo/pydatalondon2023-xparams/config/myrun.toml\n\n\n\nparams.section.subsection1.get_params()\n\n{'param1': 1900000, 'param2': True, 'param3': 'bar', 'param4': [1, 2, 3]}\n\n\n\nparams.section.subsection2.param5.get_params()\n\n{'var1': 2, 'var2': '2'}\n\n\n\n\n\nexport XPARAMS=myrun\n\n%env XPARAMS=myrun\nparams = XParams(defaults, user_params_dir=\"config\")\n\npprint(params.as_saveable_object())\n\nenv: XPARAMS=myrun\nParameters set from: /Users/vdiaz/repos/vadrienzo/pydatalondon2023-xparams/config/myrun.toml\n{'param': 'myparam',\n 'section': {'subsection1': {'param1': 1900000,\n                             'param2': True,\n                             'param3': 'bar',\n                             'param4': [1, 2, 3]},\n             'subsection2': {'param1': False,\n                             'param2': 2.0,\n                             'param3': datetime.date(2023, 6, 3),\n                             'param4': -1,\n                             'param5': {'var1': 2, 'var2': '2'}}}}\n\n\n\n%env XPARAMS=\n!make all\n\nenv: XPARAMS=\n>>>> I'll print this as many time as params.section.subsection2.param5: 1\n\n\n\nContent of myrun2.toml\n\ninclude = 'myrun'\n\n[section.subsection2.param5]\nvar1 = 5\n\n!XPARAMS=myrun2 make\n\n>>>> I'll print this as many time as params.section.subsection2.param5: 5\n>>>> I'll print this as many time as params.section.subsection2.param5: 5\n>>>> I'll print this as many time as params.section.subsection2.param5: 5\n>>>> I'll print this as many time as params.section.subsection2.param5: 5\n>>>> I'll print this as many time as params.section.subsection2.param5: 5\n\n\n\n\n\n\n%env MYRUN=myrun2\nparams = XParams(defaults, env_var='MYRUN' ,user_params_dir=\"config\")\n\npprint(params.as_saveable_object())\n\nenv: MYRUN=myrun2\nParameters set from: /Users/vdiaz/repos/vadrienzo/pydatalondon2023-xparams/config/myrun2.toml\n{'param': 'myparam',\n 'section': {'subsection1': {'param1': 500,\n                             'param2': True,\n                             'param3': 'foo',\n                             'param4': [1, 2, 3]},\n             'subsection2': {'param1': False,\n                             'param2': 2.0,\n                             'param3': datetime.date(2023, 6, 3),\n                             'param4': -1,\n                             'param5': {'var1': 5, 'var2': '2'}}}}"
+  },
+  {
+    "objectID": "index.html#what-if-i-want-to-validate-data-types-2",
+    "href": "index.html#what-if-i-want-to-validate-data-types-2",
+    "title": "Effective parameter management with XParams",
+    "section": "What if I want to validate data types?",
+    "text": "What if I want to validate data types?\n\n\n\ntitle = false\n\n[section]\nparam1 = 2\n\n[section.subsection1]\nparam1 = 500\nparam2 = true\nparam3 = \"foo\"\nparam4 =[1, 2, 3]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+  },
+  {
+    "objectID": "index.html#what-if-i-only-want-to-change-some-parameters",
+    "href": "index.html#what-if-i-only-want-to-change-some-parameters",
+    "title": "Effective parameter management with XParams",
+    "section": "What if I only want to change some parameters?",
+    "text": "What if I only want to change some parameters?\n\n\n\ntitle = \"My new title\"\n\n[section.subsection1]\nparam2 = false\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+  },
+  {
+    "objectID": "index.html#what-if-i-want-include-a-set-of-configuration-files",
+    "href": "index.html#what-if-i-want-include-a-set-of-configuration-files",
+    "title": "Effective parameter management with XParams",
+    "section": "What if I want include a set of configuration files?",
+    "text": "What if I want include a set of configuration files?\n\n\n\ninclude = \"config-prod\"\ntitle = \"My extended run\"\n\n[section.subsection1]\nparam5 = [1, 3, 5, 7, 9, 11]\n\n\n\ntoml ❌\ntomli ❌\nrtoml ❌\npydantic ❌"
+  },
+  {
+    "objectID": "index.html#what-if-i-want-to-set-a-environment-variable-with-the-configuration-file",
+    "href": "index.html#what-if-i-want-to-set-a-environment-variable-with-the-configuration-file",
+    "title": "Effective parameter management with XParams",
+    "section": "What if I want to set a environment variable with the configuration file?",
+    "text": "What if I want to set a environment variable with the configuration file?\n\n\n\nRUN=config-prod python myscript.py\n\nRUN=config-prod make\n\n\n\ntoml ❌\ntomli ❌\nrtoml ❌\npydantic ❌"
+  },
+  {
+    "objectID": "index.html#but-only-some-parameters-are-different-from-the-defaults",
+    "href": "index.html#but-only-some-parameters-are-different-from-the-defaults",
+    "title": "Effective parameter management with XParams",
+    "section": "But only some parameters are different from the defaults …",
+    "text": "But only some parameters are different from the defaults …\n\n\n\ntitle = \"My new title\"\n\n[section.subsection1]\nparam2 = false\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+  },
+  {
+    "objectID": "index.html#only-some-parameters-are-different-from-the-defaults",
+    "href": "index.html#only-some-parameters-are-different-from-the-defaults",
+    "title": "Effective parameter management with XParams",
+    "section": "Only some parameters are different from the defaults …",
+    "text": "Only some parameters are different from the defaults …\n\n\n\ntitle = \"My new title\"\n\n[section.subsection1]\nparam2 = false\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+  },
+  {
+    "objectID": "index.html#but-only-some-parameters-differ-from-the-defaults",
+    "href": "index.html#but-only-some-parameters-differ-from-the-defaults",
+    "title": "Effective parameter management with XParams",
+    "section": "But only some parameters differ from the defaults …",
+    "text": "But only some parameters differ from the defaults …\n\n\n\ntitle = \"My new title\"\n\n[section.subsection1]\nparam2 = false\n\n\n\ntoml ❌\ntomli ❌\nrtoml ✅\npydantic ✅"
+  },
+  {
+    "objectID": "index.html#thank-you",
+    "href": "index.html#thank-you",
+    "title": "Effective parameter management with XParams",
+    "section": "Thank you",
+    "text": "Thank you\n\nDo you want to know when this code is open source?\nGet in touch:\npaola.arce@smartdatafoundry.com\nvictor.diaz@smartdatafoundry.com\n\n\n\n\ngithub.com/mapsa/pydatalondon2023-xparams"
+  },
+  {
+    "objectID": "index.html#test",
+    "href": "index.html#test",
+    "title": "Effective parameter management with XParams",
+    "section": "test",
+    "text": "test\nDo you want to know when this code is open source?\nGet in touch:\npaola.arce@smartdatafoundry.com\nvictor.diaz@smartdatafoundry.com\n## Thank you\n\n\n\ngithub.com/mapsa/pydatalondon2023-xparams"
+  },
+  {
+    "objectID": "index.html#thank-you-.center",
+    "href": "index.html#thank-you-.center",
+    "title": "Effective parameter management with XParams",
+    "section": "Thank you {.center}}",
+    "text": "Thank you {.center}}\n\nDo you want to know when this code is open source?\nGet in touch:\npaola.arce@smartdatafoundry.com\nvictor.diaz@smartdatafoundry.com\n\n\n\n\ngithub.com/mapsa/pydatalondon2023-xparams"
+  },
+  {
+    "objectID": "index.html#what-is-xparams-stylemargin-top-100px-font-size-3em",
+    "href": "index.html#what-is-xparams-stylemargin-top-100px-font-size-3em",
+    "title": "Effective parameter management with XParams",
+    "section": "What is XParams? {style=“margin-top: 100px; font-size: 3em”“}",
+    "text": "What is XParams? {style=“margin-top: 100px; font-size: 3em”“}\nXParams is a Python library to manage large and complex parameters. It was born while developing our agent-based model simulation of the economy calle Aizle ( https://aizle.ai)."
+  }
+]
